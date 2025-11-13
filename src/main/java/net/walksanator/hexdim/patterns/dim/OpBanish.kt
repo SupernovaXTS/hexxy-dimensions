@@ -15,6 +15,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.TeleportTarget
 import net.minecraft.world.World
+import net.walksanator.hexdim.HexxyDimensions
 import net.walksanator.hexdim.casting.HexDimComponents
 import net.walksanator.hexdim.mishap.MishapInvalidEnv
 
@@ -22,7 +23,14 @@ class OpBanish : ConstMediaAction {
     override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val ext = env.getExtension(HexDimComponents.VecInRange.KEY)
-        val envEnabled = ext != null
+        var envEnabled = ext != null
+        // Check if we are in the hexdim dimension
+        if (!envEnabled && HexxyDimensions.STORAGE.isPresent) {
+            val hexdimWorld = HexxyDimensions.STORAGE.get().world
+            if (env.world == hexdimWorld) {
+                envEnabled = true
+            }
+        }
         if (envEnabled) {
             val iota = args[0]
             val world = env.world.server.getWorld(World.OVERWORLD)!!
