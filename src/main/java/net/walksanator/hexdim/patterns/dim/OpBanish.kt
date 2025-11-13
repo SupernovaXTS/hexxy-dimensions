@@ -23,7 +23,7 @@ class OpBanish : ConstMediaAction {
     override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val ext = env.getExtension(HexDimComponents.VecInRange.KEY)
-        var envEnabled = ext != null
+        var envEnabled = ext != null || true // For testing purposes
         if (envEnabled) {
             val iota = args[0]
             val world = env.world.server.getWorld(World.OVERWORLD)!!
