@@ -24,13 +24,6 @@ class OpBanish : ConstMediaAction {
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val ext = env.getExtension(HexDimComponents.VecInRange.KEY)
         var envEnabled = ext != null
-        // Check if we are in the hexdim dimension
-        if (!envEnabled && HexxyDimensions.STORAGE.isPresent) {
-            val hexdimWorld = HexxyDimensions.STORAGE.get().world
-            if (env.world == hexdimWorld) {
-                envEnabled = true
-            }
-        }
         if (envEnabled) {
             val iota = args[0]
             val world = env.world.server.getWorld(World.OVERWORLD)!!
