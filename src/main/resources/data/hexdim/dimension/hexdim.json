@@ -1,5 +1,5 @@
 {
-	"type": "minecraft:overworld",
+	"type": "hexdim:hexdim",
 	"generator": {
 		"type": "minecraft:flat",
 		"settings": {
